@@ -1,0 +1,76 @@
+<?php
+/**
+ * @category    Bubble
+ * @package     Bubble_QueryGrid
+ * @version     1.0.0
+ * @copyright   Copyright (c) 2015 BubbleShop (https://www.bubbleshop.net)
+ */
+/**
+ * @var $this Bubble_QueryGrid_Block_Adminhtml_Query_Chart
+ */
+if (!$this->isEnabled()) return;
+?>
+<script type="text/javascript">
+//<![CDATA[>
+Highcharts.setOptions({
+    lang: {
+        decimalPoint: '<?php echo $this->escapeHtml($this->getDecimalPoint()) ?>',
+        thousandsSep: '<?php echo $this->escapeHtml($this->getThousandSeparator()) ?>'
+    }
+});
+//]]>
+</script>
+
+<?php foreach ($this->getSeries() as $_i => $_serie): ?>
+    <?php $_id = 'chart-' . $_i; ?>
+    <div class="entry-edit">
+        <div id="<?php echo $_id ?>" class="fieldset"></div>
+    </div>
+<script type="text/javascript">
+//<![CDATA[>
+    new Highcharts.Chart({
+        chart: {
+            renderTo: '<?php echo $_id ?>',
+            type: '<?php echo $this->escapeHtml($this->getChartType()) ?>',
+            backgroundColor: 'transparent'
+        },
+        title: {
+            text: '<?php echo $this->escapeHtml($this->getTitle() . ' - ' . $_serie['name']) ?>',
+            x: -20 // center
+        },
+        legend: {
+            enabled: false
+        },
+        xAxis: {
+            categories: <?php echo json_encode($this->getValuesX()) ?>,
+            labels: {
+                rotation: -60
+            }
+        },
+        tooltip: {
+            crosshairs: true,
+            shared: true
+        },
+        yAxis: {
+            title: {
+                text: '<?php echo $this->escapeHtml($_serie['name']) ?>'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }],
+            labels: {
+                formatter: function () {
+                    return Highcharts.numberFormat(this.value, 0);
+                }
+            }
+        },
+        series: [<?php echo json_encode($_serie) ?>],
+        credits: {
+            enabled: false
+        }
+    });
+//]]>
+</script>
+<?php endforeach; ?>

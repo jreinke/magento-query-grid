@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_query_grid_index>
+        <reference name="content">
+            <block type="bubble_qgrid/adminhtml_query_list" name="query_list"/>
+        </reference>
+    </adminhtml_query_grid_index>
+    <adminhtml_query_grid_edit>
+        <reference name="head">
+            <action method="addItem">
+                <type>js</type><name>bubble/qgrid/highcharts/adapters/prototype-adapter.js</name>
+            </action>
+            <action method="addItem">
+                <type>js</type><name>bubble/qgrid/highcharts/highcharts.js</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="bubble_qgrid/adminhtml_query_edit" name="query_grid_edit" />
+            <block type="bubble_qgrid/adminhtml_query_chart" name="query_chart" template="bubble/qgrid/query/chart.phtml" />
+            <block type="bubble_qgrid/adminhtml_query_grid" name="query_grid" />
+        </reference>
+    </adminhtml_query_grid_edit>
+</layout>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <system>
+            <children>
+                <bubble_qgrid translate="title" module="bubble_qgrid">
+                    <title>Query Grid</title>
+                    <sort_order>150</sort_order>
+                    <action>adminhtml/query_grid</action>
+                </bubble_qgrid>
+            </children>
+        </system>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <bubble_qgrid translate="title" module="bubble_qgrid">
+                                <title>Query Grid</title>
+                            </bubble_qgrid>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
